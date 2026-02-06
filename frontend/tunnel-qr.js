@@ -5,10 +5,7 @@ const PORT = 5173;
 const proc = spawn(
   "cloudflared",
   ["tunnel", "--url", `http://localhost:${PORT}`],
-  //   { shell: true },
 );
-
-// const proc = spawn("ls", { shell: true });
 
 proc.stdout.on("data", handleCloudfareOutput);
 proc.stderr.on("data", handleCloudfareOutput);
