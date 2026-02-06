@@ -1,3 +1,3 @@
-Flipfone!
+# Flipfone
 
 frontend is not a major priority for now
