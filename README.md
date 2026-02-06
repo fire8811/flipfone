@@ -1,3 +1,3 @@
 # Flipfone
 
-frontend is not a major priority for now
+This is a website that measures how many times you can flip your phone before you catch it.
