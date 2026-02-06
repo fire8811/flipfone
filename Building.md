@@ -23,7 +23,6 @@ This document explains how to run FlipFone locally and expose it to a mobile dev
     cloudflared tunnel login
 4. Open two terminal windows  
    Both should be in the frontend directory.
-
 5. Start the development server  
    In the first terminal:
    ```bash
@@ -32,3 +31,5 @@ This document explains how to run FlipFone locally and expose it to a mobile dev
    In the first terminal:
    ```bash
    npm run tunnel
+7. Scan the QR code
+   The tunnel command will generate a QR code. Scan the QR code to visit the hosted site on mobile.
