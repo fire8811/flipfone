@@ -31,5 +31,4 @@ This document explains how to run FlipFone locally and expose it to a mobile dev
    In the first terminal:
    ```bash
    npm run tunnel
-7. Scan the QR code
-   The tunnel command will generate a QR code. Scan the QR code to visit the hosted site on mobile.
+7. Scan the QR code. The tunnel command will generate a QR code. Scan the QR code to visit the hosted site on mobile.
