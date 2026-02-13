@@ -23,9 +23,9 @@ export function GyroDemo() {
 
     const handleOrientation = (event: DeviceOrientationEvent) => {
         setOrientation({
-            alpha: event.alpha,
-            beta: event.beta,
-            gamma: event.gamma
+            alpha: event.alpha, //yaw (side to side)
+            beta: event.beta, //pitch (up and down)
+            gamma: event.gamma //roll
         });
     };
 
@@ -35,9 +35,10 @@ export function GyroDemo() {
       {permission !== 'granted' && (
         <button onClick={requestPermission}>Enable Gyroscope</button>
       )}
-      <p>Alpha: {orientation.alpha?.toFixed(2)}</p>
-      <p>Beta: {orientation.beta?.toFixed(2)}</p>
-      <p>Gamma: {orientation.gamma?.toFixed(2)}</p>
+      <p>Roll: {orientation.gamma?.toFixed(2)}</p>
+      <p>Pitch: {orientation.beta?.toFixed(2)}</p>
+      <p>Yaw: {orientation.alpha?.toFixed(2)}</p>
+      
     </div>
     );
 }
