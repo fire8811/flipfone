@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import { GyroDemo } from './gyroscope-demo'
+import { AccDemo } from './accelerometer-demo'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,6 +12,7 @@ function App() {
   return (
     <div className="App">
       <GyroDemo />
+      <AccDemo />
     </div>
 
     // <>
