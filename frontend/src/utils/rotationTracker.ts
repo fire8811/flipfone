@@ -25,10 +25,10 @@ export class RotationTracker {
     const wrapThreshold = wrap / 2;
     let change = curr - last;
     if (change > wrapThreshold) {
-      change = change - wrap;
+      change = wrap - change;
     }
     if (change < -wrapThreshold) {
-      change = change + wrap;
+      change = wrap + change;
     }
     return change;
   }
@@ -59,6 +59,8 @@ export class RotationTracker {
     const numYawFlips = this.totalYaw / 360;
     const numPitchFlips = this.totalPitch / 360;
     const numRollFlips = this.totalRoll / 360;
-    return numYawFlips + numPitchFlips + numRollFlips;
+    return (
+      Math.abs(numYawFlips) + Math.abs(numPitchFlips) + Math.abs(numRollFlips)
+    );
   }
 }

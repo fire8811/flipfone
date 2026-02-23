@@ -20,8 +20,6 @@ export function GyroDemo() {
   const gameLoop: Ref<GameLoop | null> = useRef(null);
 
   const [permission, SetPermission] = useState("unknown");
-  // const [numFlips, setNumFlips]: [flipData, (flipData: flipData) => void] =
-  //   useState({ yawFlips: 0, pitchFlips: 0, rollFlips: 0 });
 
   const requestPermission = async () => {
     const response = await (DeviceOrientationEvent as any).requestPermission();
