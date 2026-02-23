@@ -23,7 +23,7 @@ export function AccDemo() {
 
     //airtime counting in milliseconds
     useEffect(() => {
-      if (!running || !inFreeFall) return;
+      if (!inFreeFall) return;
 
       const start = Date.now();
       const interval = setInterval(() => {
@@ -62,7 +62,7 @@ export function AccDemo() {
 
       <h1>G FORCE: {gForce.toFixed(2)}</h1>
       
-      <button onClick={() => {setAirtime(0); setRunning(true);}}>Enable Airtime Recording</button>
+      <button onClick={() => {setAirtime(0);}}>Enable Airtime Recording</button>
       <h3>Airtime: {airtime} ms</h3>
     </div>
     );
