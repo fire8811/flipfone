@@ -2,11 +2,6 @@ import { useState, useRef, type Ref } from "react";
 import { RotationTracker } from "./utils/rotationTracker";
 import { GameLoop } from "./utils/gameLoop";
 
-export interface flipData {
-  yawFlips: number;
-  pitchFlips: number;
-  rollFlips: number;
-}
 export interface rotation {
   roll: number;
   pitch: number;
@@ -20,6 +15,7 @@ export function GyroDemo() {
     pitch: 0,
     yaw: 0,
   });
+  const [numFlips, setNumFlips] = useState<number>(0);
   const rotationTracker: Ref<RotationTracker | null> = useRef(null);
   const gameLoop: Ref<GameLoop | null> = useRef(null);
 
@@ -56,10 +52,11 @@ export function GyroDemo() {
       orientation.current.roll,
     );
     setRotationChange({
-      yaw: orientation.current.yaw,
-      pitch: orientation.current.pitch,
-      roll: orientation.current.roll,
+      yaw: rotationTracker.current?.totalYaw ?? 0,
+      pitch: rotationTracker.current?.totalPitch ?? 0,
+      roll: rotationTracker.current?.totalRoll ?? 0,
     });
+    setNumFlips(rotationTracker.current?.countFlips() ?? 0);
   };
 
   const startMeasureRotation = () => {
@@ -87,6 +84,7 @@ export function GyroDemo() {
       <p>Roll: {rotationChange.roll.toFixed(2)}</p>
       <p>Pitch: {rotationChange.pitch.toFixed(2)}</p>
       <p>Yaw: {rotationChange.yaw.toFixed(2)}</p>
+      <p>Number of flips: {numFlips.toFixed(2)}</p>
       <button onClick={startMeasureRotation}>Start measuring rotation</button>
       <button onClick={stopMeasureRotation}>Stop measuring rotation</button>
     </div>
