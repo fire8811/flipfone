@@ -1,6 +1,6 @@
 import { useState, useRef, type Ref } from "react";
-import { RotationTracker } from "./utils/rotationTracker";
-import { GameLoop } from "./utils/gameLoop";
+import { RotationTracker } from "../utils/rotationTracker";
+import { GameLoop } from "../utils/gameLoop";
 
 export interface rotation {
   roll: number;

@@ -3,8 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-import { GyroDemo } from './gyroscope-demo'
-import { AccDemo } from './accelerometer-demo'
+import { GyroDemo } from './demo/gyroscope-demo'
+import { AccDemo } from './demo/accelerometer-demo'
 
 function App() {
   const [count, setCount] = useState(0)
