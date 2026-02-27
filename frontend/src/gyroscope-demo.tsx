@@ -15,6 +15,11 @@ export function GyroDemo() {
     pitch: 0,
     yaw: 0,
   });
+  const [rotation, setRotation] = useState<rotation>({
+    roll: 0,
+    pitch: 0,
+    yaw: 0,
+  });
   const [numFlips, setNumFlips] = useState<number>(0);
   const rotationTracker: Ref<RotationTracker | null> = useRef(null);
   const gameLoop: Ref<GameLoop | null> = useRef(null);
@@ -54,6 +59,7 @@ export function GyroDemo() {
       pitch: rotationTracker.current?.totalPitch ?? 0,
       roll: rotationTracker.current?.totalRoll ?? 0,
     });
+    setRotation(orientation.current);
     setNumFlips(rotationTracker.current?.countFlips() ?? 0);
   };
 
@@ -79,9 +85,12 @@ export function GyroDemo() {
       {permission !== "granted" && (
         <button onClick={requestPermission}>Enable Gyroscope</button>
       )}
-      <p>Roll: {rotationChange.roll.toFixed(2)}</p>
-      <p>Pitch: {rotationChange.pitch.toFixed(2)}</p>
-      <p>Yaw: {rotationChange.yaw.toFixed(2)}</p>
+      <p>Roll: {rotation.roll.toFixed(2)}</p>
+      <p>Pitch: {rotation.pitch.toFixed(2)}</p>
+      <p>Yaw: {rotation.yaw.toFixed(2)}</p>
+      <p>Change in roll: {rotationChange.roll.toFixed(2)}</p>
+      <p>Change in pitch: {rotationChange.pitch.toFixed(2)}</p>
+      <p>Change in yaw: {rotationChange.yaw.toFixed(2)}</p>
       <p>Number of flips: {numFlips.toFixed(2)}</p>
       <button onClick={startMeasureRotation}>Start measuring rotation</button>
       <button onClick={stopMeasureRotation}>Stop measuring rotation</button>

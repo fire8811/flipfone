@@ -22,7 +22,7 @@ export class RotationTracker {
    * @param wrap How much the value increases before it wraps around
    */
   private getChangeWrapped(last: number, curr: number, wrap: number): number {
-    const wrapThreshold = wrap / 2;
+    const wrapThreshold = wrap - 10;
     let change = curr - last;
     if (change > wrapThreshold) {
       change = wrap - change;
