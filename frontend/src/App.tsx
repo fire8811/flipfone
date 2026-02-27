@@ -1,42 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-
-import { GyroDemo } from './demo/gyroscope-demo'
-import { AccDemo } from './demo/accelerometer-demo'
+import { Demo } from './demo/demo'
+import { Game } from './Game/game'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [page, setPage] = useState<'home' | 'demo' | 'game'>('home')
 
   return (
     <div className="App">
-      <GyroDemo />
-      {/* <AccDemo /> */}
-    </div>
+      <nav style={{ display: 'flex', gap: '1rem', padding: '1rem', borderBottom: '1px solid #ccc' }}>
+        <button onClick={() => setPage('demo')}>Demo</button>
+        <button onClick={() => setPage('game')}>Game</button>
+      </nav>
 
-    // <>
-    //   <div>
-    //     <a href="https://vite.dev" target="_blank">
-    //       <img src={viteLogo} className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://react.dev" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.tsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    // </>
+      {page === 'demo' && <Demo />}
+      {page === 'game' && <Game />}
+      {page === 'home' && <p>Select a page above.</p>}
+    </div>
   )
 }
 
