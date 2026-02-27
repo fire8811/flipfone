@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { Demo } from './demo/demo'
+import { Game } from './Game/game'
 
 function App() {
   const [page, setPage] = useState<'home' | 'demo' | 'game'>('home')
@@ -13,7 +14,7 @@ function App() {
       </nav>
 
       {page === 'demo' && <Demo />}
-      {page === 'game' && <p>Game coming soon...</p>}
+      {page === 'game' && <Game />}
       {page === 'home' && <p>Select a page above.</p>}
     </div>
   )
