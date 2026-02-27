@@ -11,6 +11,7 @@ export function Game() {
             permission =await requestPermission();
         }
         if (permission !== 'granted') return;
+        setAirtime(0);
         setGameActive(true);
     }
 
