@@ -18,7 +18,7 @@ export class GameLoop {
       const dt = currentTime - this.lastTime;
       this.lastTime = currentTime;
 
-      this.loopCb(dt);
+      this.loopCb(dt / 1000);
 
       if (this.running) {
         requestAnimationFrame(cb);
