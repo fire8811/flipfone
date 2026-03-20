@@ -22,7 +22,7 @@ export function Game() {
 		pitch: number;
 		yaw: number;
 	}
-	const [rotationRate, setRotationRate] = useState<rotation>({ roll: 0, pitch: 0, yaw: 0 });
+	const rotationRateRef = useRef<rotation>({ roll: 0, pitch: 0, yaw: 0 });
 	const rotationTracker = useRef(new RotationTracker());
 	const gameLoop = useRef<GameLoop | null>(null);
 
@@ -47,7 +47,7 @@ export function Game() {
 	};
 
 	function gameUpdate(dt: number) {
-		rotationTracker.current.process(rotationRate, dt);
+		rotationTracker.current.process(rotationRateRef.current, dt);
 		setFlips(rotationTracker.current.numFlips);
 
 		if (inFreeFall) {
@@ -105,11 +105,11 @@ export function Game() {
 			event.rotationRate?.beta !== null &&
 			event.rotationRate?.gamma !== null
 		) {
-			setRotationRate({
+			rotationRateRef.current = {
 				yaw: event.rotationRate.alpha, // Yaw (side to side)
 				pitch: event.rotationRate.beta, // Pitch (up and down)
 				roll: event.rotationRate.gamma, // Roll
-			});
+			};
 		}
 	};
 

@@ -17,9 +17,12 @@ export class RotationTracker {
 
 	public process(rotationRate: rotation, dt: number) {
 		const degToRad = Math.PI / 180;
-		const deltaYaw = rotationRate.yaw * dt * degToRad;
-		const deltaPitch = rotationRate.pitch * dt * degToRad;
-		const deltaRoll = rotationRate.roll * dt * degToRad;
+		let deltaYaw = rotationRate.yaw * dt * degToRad;
+		deltaYaw = Math.abs(deltaYaw) > 0.001 ? deltaYaw : 0;
+		let deltaPitch = rotationRate.pitch * dt * degToRad;
+		deltaPitch = Math.abs(deltaPitch) > 0.001 ? deltaPitch : 0;
+		let deltaRoll = rotationRate.roll * dt * degToRad;
+		deltaRoll = Math.abs(deltaRoll) > 0.001 ? deltaRoll : 0;
 
 		const quaternionRotationChange: Quaternion = Quaternion.fromEulerLogical(deltaYaw, deltaPitch, deltaRoll);
 		const angle = 2 * Math.acos(quaternionRotationChange.w); // radians
