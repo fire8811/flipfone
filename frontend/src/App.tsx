@@ -3,7 +3,7 @@ import "./App.css";
 import { Demo } from "./demo/demo";
 import { Game } from "./Game/game";
 import { WarningModal } from "./WarningModal";
-import { DevServer } from "./devServer.ts/devSever";
+import { DevServer } from "./devServer/devSever";
 
 function App() {
   const [page, setPage] = useState<"home" | "demo" | "game">("home");
