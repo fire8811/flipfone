@@ -15,7 +15,7 @@ export class RotationTracker {
 		this._numFlips = 0;
 	}
 
-	public process(rotationRate: rotation, dt: number) {
+	public process(rotationRate: rotation, dt: number): number {
 		const degToRad = Math.PI / 180;
 		let deltaYaw = rotationRate.yaw * dt * degToRad;
 		deltaYaw = Math.abs(deltaYaw) > 0.001 ? deltaYaw : 0;
@@ -27,6 +27,8 @@ export class RotationTracker {
 		const quaternionRotationChange: Quaternion = Quaternion.fromEulerLogical(deltaYaw, deltaPitch, deltaRoll);
 		const angle = 2 * Math.acos(quaternionRotationChange.w); // radians
 		const angleDeg = angle * (180 / Math.PI);
-		this._numFlips += angleDeg / 360;
+		const changeFlips =angleDeg / 360 
+		this._numFlips += changeFlips;
+		return changeFlips / (dt * 1000) // Return flip rate
 	}
 }

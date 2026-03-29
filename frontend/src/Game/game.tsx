@@ -5,12 +5,7 @@ import { RotationTracker } from "../utils/rotationTracker";
 
 type GamePhase = "idle" | "armed" | "in_flight";
 
-// Throw detection
-const FREEFALL_THRESHOLD = 0.6; // g — below this is considered free fall
-const FREEFALL_CONFIRM_FRAMES = 5; // consecutive frames before throw is confirmed
-
 // Landing/catch detection
-const IMPACT_THRESHOLD = 5.0; // g — spike above this ends the round
 const MIN_AIRTIME_S = 0.1; // ignore impacts before this (filters throw impulse)
 
 export function Game() {
@@ -46,37 +41,19 @@ export function Game() {
 
 	function gameUpdate(dt: number) {
 		const currentPhase = phaseRef.current;
-		const currentGForce = gForceRef.current;
 
-		if (currentPhase === "armed") {
-			// Wait for sustained free fall to confirm the throw
-			if (currentGForce <= FREEFALL_THRESHOLD) {
-				freeFallFrames.current++;
-				if (freeFallFrames.current >= FREEFALL_CONFIRM_FRAMES) {
-					// Throw confirmed — start tracking
-					freeFallFrames.current = 0;
-					airtimeRef.current = 0;
-					setAirtime(0);
-					rotationTracker.current.reset();
-					setFlips(0);
-					transitionTo("in_flight");
-				}
-			} else {
-				freeFallFrames.current = 0; // reset on any non-freefall frame
-			}
-		} else if (currentPhase === "in_flight") {
+		if (currentPhase === "in_flight") {
 			airtimeRef.current += dt;
 			setAirtime(airtimeRef.current);
 
-			rotationTracker.current.process(rotationRateRef.current, dt);
-			setFlips(rotationTracker.current.numFlips);
+			const rotationRate = rotationTracker.current.process(rotationRateRef.current, dt);
 
-			// Detect landing/catch: g-force spike after minimum airtime,
-			// or safety timeout for soft landings
-			if (airtimeRef.current >= MIN_AIRTIME_S) {
-				if (currentGForce >= IMPACT_THRESHOLD) {
-					endGameRound();
-				}
+			setFlips(rotationTracker.current.numFlips);
+			const inAir = gForceRef.current < 1 || rotationRate > 0.001 
+			const minAirtime = airtimeRef.current >= MIN_AIRTIME_S 
+
+			if (!inAir && minAirtime) {
+				endGameRound();
 			}
 		}
 	}
@@ -118,6 +95,18 @@ export function Game() {
 
 	const handleAcceleration = (event: DeviceMotionEvent) => {
 		const acc = event.accelerationIncludingGravity;
+		const accX: number = event.acceleration?.x ?? 0;
+		const accY: number = event.acceleration?.y ?? 0;
+		const accZ: number = event.acceleration?.z ?? 0;
+		const accMagnitude = Math.sqrt(
+			accX * accX	+
+			accY * accY +
+			accZ * accZ
+		)
+		if(accMagnitude > 15) {
+			transitionTo("in_flight");
+		}
+
 		if (acc && acc.x !== null && acc.y !== null && acc.z !== null) {
 			const magnitude = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z);
 			gForceRef.current = magnitude / 9.8;
