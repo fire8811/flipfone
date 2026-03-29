@@ -150,11 +150,12 @@ export function Game() {
 		in_flight: "Flying!",
 	}[phase];
 
+	const flipsInt = Math.round(flips);
 	return (
 		<div>
 			<div className="flip-container">
 				{/* Top-right flip counter */}
-				<div className="flip-counter">{Math.round(flips)} flips</div>
+				<div className="flip-counter">{flipsInt} flip{flipsInt === 1 ? "" : "s"}</div>
 
 				{/* Center airtime */}
 				<div className="airtime-display">{airtime.toFixed(2)}s</div>
