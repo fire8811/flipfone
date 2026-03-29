@@ -28,7 +28,7 @@ body {
 	position: absolute;
 	top: 10%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -60%);
 	font-size: 3.5rem;
 	font-weight: 800;
 	text-align: center;
@@ -39,7 +39,7 @@ body {
 /* Flip counter directly under airtime */
 .flip-counter {
 	position: absolute;
-	top: calc(10% + 30px); /* 60px below airtime */
+	top: calc(10% + 20px); /* 60px below airtime */
 	left: 50%;
 	transform: translateX(-50%);
 	font-size: 1.8rem;
@@ -56,6 +56,7 @@ body {
 }
 
 .phone-body {
+	margin-top: 75px;
 	width: 220px;
 	height: 440px;
 	border-radius: 40px;
@@ -84,7 +85,7 @@ body {
 	bottom: 20%;
 
 	/* Only push it down by HALF its height */
-	transform: translate(-50%, 50%);
+	transform: translate(-50%, calc(50% + 25px));
 
 	width: 120px;
 	height: 120px;
