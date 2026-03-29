@@ -9,7 +9,7 @@ type GamePhase = "idle" | "armed" | "in_flight";
 const MIN_AIRTIME_S = 0.1; // ignore impacts before this (filters throw impulse)
 const MIN_DOWNTIME_S = 0.2; // ignore impacts before this (filters catch impulse)
 
-const MIN_START_MAGNITUDE_THRESHOLD = 20; 
+const MIN_START_MAGNITUDE_THRESHOLD = 17.5; 
 
 export function Game() {
 	// Permissions
@@ -62,7 +62,7 @@ export function Game() {
 			const rotationRate = rotationTracker.current.process(rotationRateRef.current, dt);
 
 			setFlips(rotationTracker.current.numFlips);
-			const inAir = gForceRef.current < 1 || rotationRate > 0.001 
+			const inAir = gForceRef.current < 1.2 || rotationRate > 0.001; 
 			const minAirtime = airtimeRef.current >= MIN_AIRTIME_S 
 
 			if (!inAir && minAirtime) {
