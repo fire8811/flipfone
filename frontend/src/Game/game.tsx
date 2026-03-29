@@ -9,6 +9,8 @@ type GamePhase = "idle" | "armed" | "in_flight";
 const MIN_AIRTIME_S = 0.1; // ignore impacts before this (filters throw impulse)
 const MIN_DOWNTIME_S = 0.2; // ignore impacts before this (filters catch impulse)
 
+const MIN_START_MAGNITUDE_THRESHOLD = 20; 
+
 export function Game() {
 	// Permissions
 	const [accPermission, setAccPermission] = useState(false);
@@ -116,7 +118,7 @@ export function Game() {
 			accY * accY +
 			accZ * accZ
 		)
-		if(accMagnitude > 15 && downtimeRef.current && phaseRef.current == "armed") {
+		if(accMagnitude > MIN_START_MAGNITUDE_THRESHOLD && downtimeRef.current && phaseRef.current == "armed") {
 			transitionTo("in_flight");
 		}
 
