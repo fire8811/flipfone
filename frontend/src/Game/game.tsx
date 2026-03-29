@@ -7,6 +7,7 @@ type GamePhase = "idle" | "armed" | "in_flight";
 
 // Landing/catch detection
 const MIN_AIRTIME_S = 0.1; // ignore impacts before this (filters throw impulse)
+const MIN_DOWNTIME_S = 1.5; // ignore impacts before this (filters catch impulse)
 
 export function Game() {
 	// Permissions
@@ -17,6 +18,7 @@ export function Game() {
 	const [airtime, setAirtime] = useState(0);
 	const [flips, setFlips] = useState(0);
 	const [phase, setPhase] = useState<GamePhase>("idle");
+	const downtimeRef = useRef(true);
 
 	interface rotation {
 		roll: number;
@@ -35,8 +37,17 @@ export function Game() {
 
 	// Keep phaseRef and phase state in sync
 	function transitionTo(p: GamePhase) {
+		if(p == "in_flight") {
+			downtimeRef.current = false;
+		}
 		phaseRef.current = p;
 		setPhase(p);
+	}
+
+	function onLand() {
+		setTimeout(() => {
+			downtimeRef.current = true;
+		}, MIN_DOWNTIME_S * 1000);
 	}
 
 	function gameUpdate(dt: number) {
@@ -53,6 +64,7 @@ export function Game() {
 			const minAirtime = airtimeRef.current >= MIN_AIRTIME_S 
 
 			if (!inAir && minAirtime) {
+				onLand();
 				endGameRound();
 			}
 		}
@@ -74,6 +86,7 @@ export function Game() {
 
 	function endGameRound() {
 		gameLoop.current?.stop();
+		rotationTracker.current.reset()
 		transitionTo("idle");
 	}
 
@@ -103,7 +116,7 @@ export function Game() {
 			accY * accY +
 			accZ * accZ
 		)
-		if(accMagnitude > 15) {
+		if(accMagnitude > 15 && downtimeRef.current && phaseRef.current == "armed") {
 			transitionTo("in_flight");
 		}
 

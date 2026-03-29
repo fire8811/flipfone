@@ -4,7 +4,7 @@ type LoopCallback = (dt: number) => void;
 export class GameLoop {
   private loopCb: LoopCallback;
   private lastTime: number = 0;
-  private running = false;
+  public running = false;
 
   constructor(loopCallback: LoopCallback) {
     this.loopCb = loopCallback;
