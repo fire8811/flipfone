@@ -7,7 +7,7 @@ type GamePhase = "idle" | "armed" | "in_flight";
 
 // Landing/catch detection
 const MIN_AIRTIME_S = 0.1; // ignore impacts before this (filters throw impulse)
-const MIN_DOWNTIME_S = 1.5; // ignore impacts before this (filters catch impulse)
+const MIN_DOWNTIME_S = 0.2; // ignore impacts before this (filters catch impulse)
 
 export function Game() {
 	// Permissions
