@@ -3,10 +3,9 @@ import "./App.css";
 import { Demo } from "./demo/demo";
 import { Game } from "./Game/game";
 import { WarningModal } from "./WarningModal";
-import { DevServer } from "./devServer/devSever";
 
 function App() {
-  const [page, setPage] = useState<"home" | "demo" | "game">("home");
+  const [page, setPage] = useState<"home" | "demo" | "game">("game");
   const [acknowledged, setAcknowledged] = useState(false);
 
   return (
@@ -30,9 +29,6 @@ function App() {
 
       {page === "demo" && <Demo />}
       {page === "game" && <Game />}
-      <button onClick={() => DevServer.log("Hello, server!")}>
-        Log something
-      </button>
     </div>
   );
 }
