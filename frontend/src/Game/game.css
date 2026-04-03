@@ -47,6 +47,18 @@ body {
 	opacity: 0.9;
 }
 
+/* High score  */
+.high-score {
+	position: absolute;
+	width: 100vw;
+	top: calc(10% + 60px);
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 1.2rem;
+	font-weight: 700;
+	opacity: 0.9;
+}
+
 /* Phone visual */
 .phone-visual {
 	flex: 1;

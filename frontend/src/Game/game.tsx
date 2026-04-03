@@ -165,7 +165,7 @@ export function Game() {
 				<div className="flip-counter">{flipsInt} flip{flipsInt === 1 ? "" : "s"}</div>
 
 				{/* Flip high score */}
-				<div>HIGH SCORE: {highScore} flip{highScore === 1 ? "" : "s"}</div>
+				<div className="high-score">HIGH SCORE: {highScore} flip{highScore === 1 ? "" : "s"}</div>
 
 				{/* Phone visual */}
 				<div className="phone-visual">
