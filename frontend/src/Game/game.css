@@ -21,12 +21,13 @@ body {
 	align-items: center;
 	justify-content: center;
 	color: white;
+	padding-bottom: 3.5rem;
 }
 
 /* Center airtime */
 .airtime-display {
 	position: absolute;
-	top: 10%;
+	top: 12%;
 	left: 50%;
 	transform: translate(-50%, -60%);
 	font-size: 3.5rem;
@@ -39,7 +40,7 @@ body {
 /* Flip counter directly under airtime */
 .flip-counter {
 	position: absolute;
-	top: calc(10% + 20px); /* 60px below airtime */
+	top: calc(12% + 1.25rem); /* ~20px below airtime */
 	left: 50%;
 	transform: translateX(-50%);
 	font-size: 1.8rem;
@@ -56,11 +57,11 @@ body {
 }
 
 .phone-body {
-	margin-top: 75px;
-	width: 220px;
-	height: 440px;
-	border-radius: 40px;
-	border: 2px solid rgba(255, 255, 255, 0.2);
+	position: relative;
+	height: min(60vh, 27.5rem);
+	aspect-ratio: 1 / 2;
+	border-radius: 2.5rem;
+	border: 0.125rem solid rgba(255, 255, 255, 0.2);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -70,7 +71,7 @@ body {
 .phone-screen {
 	width: 85%;
 	height: 85%;
-	border-radius: 30px;
+	border-radius: 2rem;
 	background: #0b1120;
 	display: flex;
 	align-items: center;
@@ -82,13 +83,13 @@ body {
 .flip-circle {
 	position: absolute;
 	left: 50%;
-	bottom: 20%;
+	bottom: 0;
 
-	/* Only push it down by HALF its height */
-	transform: translate(-50%, calc(50% + 25px));
+	/* Center horizontally and overlap bottom edge by half its height */
+	transform: translate(-50%, 50%);
 
-	width: 120px;
-	height: 120px;
+	width: 7.5rem;
+	height: 7.5rem;
 	border-radius: 50%;
 	border: none;
 
@@ -98,8 +99,9 @@ body {
 	font-weight: 600;
 
 	cursor: pointer;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.4);
 	transition: transform 0.15s ease, box-shadow 0.15s ease;
+	z-index: 10;
 }
 
 .flip-circle:active {

@@ -164,17 +164,16 @@ export function Game() {
 				<div className="phone-visual">
 					<div className="phone-body">
 						<div className="phone-screen">{statusText}</div>
+						{/* Bottom circular button — arms the detector */}
+						<button
+							className={`flip-circle ${phase !== "idle" ? "pressed" : ""}`}
+							onClick={armRound}
+							disabled={phase === "in_flight"}
+						>
+							{phase === "idle" ? "Play" : phase === "armed" ? "Armed" : "Flying!"}
+						</button>
 					</div>
 				</div>
-
-				{/* Bottom circular button — arms the detector */}
-				<button
-					className={`flip-circle ${phase !== "idle" ? "pressed" : ""}`}
-					onClick={armRound}
-					disabled={phase === "in_flight"}
-				>
-					{phase === "idle" ? "Play" : phase === "armed" ? "Armed" : "Flying!"}
-				</button>
 			</div>
 		</div>
 	);

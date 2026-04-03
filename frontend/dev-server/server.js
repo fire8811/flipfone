@@ -6,7 +6,7 @@ import { tunnelQr } from "./tunnel-qr.js";
 const app = express();
 
 const FRONTEND_PORT = 5173;
-const PROXY_PORT = 5000;
+const PROXY_PORT = 6000;
 
 app.use(json());
 
