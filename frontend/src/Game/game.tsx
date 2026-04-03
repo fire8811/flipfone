@@ -91,6 +91,7 @@ export function Game() {
 		gameLoop.current?.stop();
 		if(rotationTracker.current.numFlips > highScore) {
 			setHighScore(Math.round(rotationTracker.current.numFlips));
+			(window as any).triggerFireworks(10);
 		}
 		rotationTracker.current.reset()
 		transitionTo("idle");
