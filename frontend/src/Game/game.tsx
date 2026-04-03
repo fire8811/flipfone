@@ -19,6 +19,7 @@ export function Game() {
 	// Display state
 	const [airtime, setAirtime] = useState(0);
 	const [flips, setFlips] = useState(0);
+	const [highScore, setHighScore] = useState<number>(0);
 	const [phase, setPhase] = useState<GamePhase>("idle");
 	const downtimeRef = useRef(true);
 
@@ -88,6 +89,9 @@ export function Game() {
 
 	function endGameRound() {
 		gameLoop.current?.stop();
+		if(rotationTracker.current.numFlips > highScore) {
+			setHighScore(Math.round(rotationTracker.current.numFlips));
+		}
 		rotationTracker.current.reset()
 		transitionTo("idle");
 	}
@@ -154,11 +158,14 @@ export function Game() {
 	return (
 		<div>
 			<div className="flip-container">
-				{/* Top-right flip counter */}
+				{/* Airtime */}
+				<div className="airtime-display">{airtime.toFixed(2)}s</div>
+
+				{/* Flip counter */}
 				<div className="flip-counter">{flipsInt} flip{flipsInt === 1 ? "" : "s"}</div>
 
-				{/* Center airtime */}
-				<div className="airtime-display">{airtime.toFixed(2)}s</div>
+				{/* Flip high score */}
+				<div>HIGH SCORE: {highScore} flip{highScore === 1 ? "" : "s"}</div>
 
 				{/* Phone visual */}
 				<div className="phone-visual">
